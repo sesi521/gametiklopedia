@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIKLOPEDIA - Ensiklopedia TIK: Dulu, Kini, dan Nanti</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter & Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            cyan: '#06b6d4',
+                            teal: '#14b8a6',
+                            blue: '#3b82f6',
+                            yellow: '#f59e0b',
+                            orange: '#f97316',
+                            purple: '#8b5cf6',
+                            dark: '#0f172a',
+                            light: '#f8fafc'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 50%, #fef3c7 100%);
+            min-height: 100vh;
+        }
+        .heading-font {
+            font-family: 'Outfit', sans-serif;
+        }
+        .bounce-gentle {
+            animation: bounceGentle 2s infinite;
+        }
+        @keyframes bounceGentle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 8px;
+        }
+        .badge-glow {
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+        }
+    </style>
+</head>
+<body class="text-slate-800 flex flex-col min-h-screen justify-between relative overflow-x-hidden">
+
+    <!-- Ambient Graphic Circles -->
+    <div class="fixed top-0 left-0 w-72 h-72 bg-cyan-300 opacity-20 rounded-full filter blur-3xl -z-10 pointer-events-none"></div>
+    <div class="fixed bottom-0 right-0 w-96 h-96 bg-amber-300 opacity-20 rounded-full filter blur-3xl -z-10 pointer-events-none"></div>
+
+    <!-- TOP HEADER -->
+    <header class="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-40 px-4 py-3 shadow-sm">
+        <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <!-- Brand Logo Title -->
+            <div class="flex items-center gap-3 cursor-pointer" onclick="showScreen('screen-splash')">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xl font-black shadow-md shadow-cyan-200">
+                    <i class="fa-solid fa-laptop-code"></i>
+                </div>
+                <div>
+                    <h1 class="heading-font text-xl font-extrabold text-slate-800 tracking-wide leading-none">TIKLOPEDIA</h1>
+                    <span class="text-xs font-semibold text-cyan-600">Ensiklopedia TIK: Dulu, Kini & Nanti</span>
+                </div>
+            </div>
+
+            <!-- Partner Logos Required -->
+            <div class="flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200">
+                <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider hidden sm:inline">Mitra TIK</span>
+                <div class="flex items-center gap-2">
+                    <img src="https://imgur.com/6b0Vgbx.png" alt="Logo 1" class="h-6 object-contain" onerror="this.src='https://placehold.co/40x40/06b6d4/ffffff?text=L1'">
+                    <img src="https://imgur.com/K8WRtUn.png" alt="Logo 2" class="h-6 object-contain" onerror="this.src='https://placehold.co/40x40/3b82f6/ffffff?text=L2'">
+                    <img src="https://imgur.com/l9Dja22.png" alt="Logo 3" class="h-6 object-contain" onerror="this.src='https://placehold.co/40x40/f59e0b/ffffff?text=L3'">
+                    <img src="https://imgur.com/Af8rMHp.png" alt="Logo 4" class="h-6 object-contain" onerror="this.src='https://placehold.co/40x40/10b981/ffffff?text=L4'">
+                </div>
+            </div>
+
+            <!-- Header Quick Stats (Visible when profile set) -->
+            <div id="header-stats" class="hidden flex items-center gap-3">
+                <div class="flex items-center gap-1.5 bg-amber-50 text-amber-700 px-3 py-1 rounded-full text-sm font-bold border border-amber-200">
+                    <i class="fa-solid fa-star text-amber-500"></i>
+                    <span id="player-score-display">0</span> Poin
+                </div>
+                <div class="flex items-center gap-1.5 bg-cyan-50 text-cyan-700 px-3 py-1 rounded-full text-sm font-bold border border-cyan-200">
+                    <i class="fa-solid fa-award text-cyan-500"></i>
+                    <span id="player-badge-count">0</span>/6 Lencana
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-6 flex-1 w-full">
+
+        <!-- ============================================================ -->
+        <!-- SCREEN 1: SPLASH SCREEN / HOME -->
+        <!-- ============================================================ -->
+        <section id="screen-splash" class="screen-view transition-all duration-300">
+            <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-slate-100 text-center max-w-4xl mx-auto my-4 relative overflow-hidden">
+                <div class="inline-flex items-center gap-2 bg-cyan-100 text-cyan-800 px-4 py-1.5 rounded-full font-bold text-xs uppercase tracking-wider mb-4">
+                    <i class="fa-solid fa-sparkles"></i> Media Pembelajaran Informatika Kelas VII
+                </div>
+
+                <h1 class="heading-font text-3xl sm:text-5xl font-extrabold text-slate-800 mb-2 leading-tight">
+                    TIKLOPEDIA
+                </h1>
+                <p class="text-slate-600 text-lg sm:text-xl font-medium mb-6">
+                    “Ensiklopedia TIK: Dulu, Kini, dan Nanti”
+                </p>
+
+                <!-- Mascot Greeting Banner -->
+                <div class="bg-gradient-to-r from-cyan-50 to-blue-50 p-6 rounded-2xl border border-cyan-100 mb-8 flex flex-col sm:flex-row items-center gap-6 text-left">
+                    <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-tr from-cyan-400 to-blue-500 flex items-center justify-center text-white text-4xl shrink-0 shadow-lg bounce-gentle">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-slate-800 text-lg mb-1">Halo Penjelajah Muda! 👋</h2>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Selamat datang di TIKLOPEDIA! Mari kita jelajahi dunia Perkakas Teknologi Informasi dan Komunikasi. Kumpulkan poin, raih lencana luhur, dan jadilah <strong>Master TIKLOPEDIA</strong>!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap justify-center gap-4 mb-8">
+                    <button onclick="showScreen('screen-profile')" class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-bold px-8 py-4 rounded-2xl text-lg shadow-lg shadow-cyan-200 transition transform hover:-translate-y-0.5 flex items-center gap-3">
+                        <i class="fa-solid fa-rocket"></i> Mulai Petualangan
+                    </button>
+                    <button onclick="openModal('modal-guide')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-6 py-4 rounded-2xl text-base transition flex items-center gap-2">
+                        <i class="fa-solid fa-circle-info"></i> Panduan
+                    </button>
+                    <button onclick="openModal('modal-about')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-6 py-4 rounded-2xl text-base transition flex items-center gap-2">
+                        <i class="fa-solid fa-address-card"></i> Tentang
+                    </button>
+                </div>
+
+                <!-- Creator Credit Tag -->
+                <div class="text-xs text-slate-400 font-medium">
+                    Kreator Media: <span class="text-slate-600 font-semibold">Sesi Mulyasi, M.Pd.</span> | Informatika SMP Kelas VII (Fase D)
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- SCREEN 2: PROFILE SETUP -->
+        <!-- ============================================================ -->
+        <section id="screen-profile" class="screen-view hidden transition-all duration-300">
+            <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-slate-100 max-w-2xl mx-auto my-4">
+                <div class="text-center mb-8">
+                    <span class="text-xs font-bold text-cyan-600 uppercase tracking-widest bg-cyan-50 px-3 py-1 rounded-full">Identitas Penjelajah</span>
+                    <h2 class="heading-font text-2xl sm:text-3xl font-extrabold text-slate-800 mt-2">Isi Profil Kamu</h2>
+                    <p class="text-slate-500 text-sm mt-1">Lengkapi data diri sebelum memasuki dunia TIKLOPEDIA.</p>
+                </div>
+
+                <form onsubmit="saveProfile(event)" class="space-y-5">
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-1">Nama Lengkap</label>
+                        <input type="text" id="input-nama" required placeholder="Masukkan nama kamu..." class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-cyan-500 focus:outline-none transition">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1">Kelas</label>
+                            <input type="text" id="input-kelas" required placeholder="Contoh: VII-A" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-cyan-500 focus:outline-none transition">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1">Nomor Absen</label>
+                            <input type="number" id="input-absen" required placeholder="Contoh: 12" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-cyan-500 focus:outline-none transition">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Pilih Avatar Penjelajah</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="avatar-selector">
+                            <!-- Avatar options injected by JS -->
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-bold py-3.5 rounded-xl text-base shadow-md transition transform hover:-translate-y-0.5 mt-4">
+                        Masuk ke Peta Petualangan <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- SCREEN 3: ADVENTURE MAP (PETA UTAMA) -->
+        <!-- ============================================================ -->
+        <section id="screen-map" class="screen-view hidden transition-all duration-300 space-y-6">
+            <!-- Player Stats Banner -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <div id="map-avatar-icon" class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white text-2xl shadow-md">
+                        <i class="fa-solid fa-user-astronaut"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-extrabold text-lg text-slate-800" id="map-player-name">Nama Peserta</h3>
+                        <p class="text-xs text-slate-500 font-semibold" id="map-player-info">Kelas VII | Absen --</p>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="flex-1 max-w-xs min-w-[200px]">
+                    <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+                        <span>PROGRES PETUALANGAN</span>
+                        <span id="map-progress-text">0%</span>
+                    </div>
+                    <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden border border-slate-200">
+                        <div id="map-progress-bar" class="bg-gradient-to-r from-cyan-500 to-teal-400 h-full w-0 transition-all duration-500"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center max-w-xl mx-auto">
+                <h2 class="heading-font text-2xl sm:text-3xl font-extrabold text-slate-800">Peta Zona TIKLOPEDIA</h2>
+                <p class="text-slate-600 text-sm mt-1">Selesaikan tiap zona secara berurutan untuk membuka Misi Master TIKLOPEDIA!</p>
+            </div>
+
+            <!-- Zone Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="zones-grid">
+                <!-- Zones rendered by JS -->
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- ZONA 1: TIK DULU (TIMELINE INTERAKTIF) -->
+        <!-- ============================================================ -->
+        <section id="screen-zone-1" class="screen-view hidden transition-all duration-300">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100 max-w-4xl mx-auto space-y-6">
+                <!-- Navigation & Title -->
+                <div class="flex items-center justify-between border-b pb-4">
+                    <button onclick="showScreen('screen-map')" class="text-slate-600 hover:text-cyan-600 font-bold text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali ke Peta
+                    </button>
+                    <span class="text-xs font-bold bg-amber-100 text-amber-800 px-3 py-1 rounded-full">Zona 01 — TIK Dulu</span>
+                </div>
+
+                <div>
+                    <h2 class="heading-font text-2xl font-extrabold text-slate-800">Menjelajah Jejak Teknologi</h2>
+                    <p class="text-slate-600 text-sm mt-1">
+                        Susunlah perangkat TIK berikut dari <strong>Masa Lalu (Sederhana)</strong> menuju <strong>Masa Kini & Masa Depan (Digital/Modern)</strong>!
+                    </p>
+                </div>
+
+                <!-- Timeline Sort Board -->
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-4">
+                    <div class="text-xs font-bold text-slate-500 uppercase tracking-wider text-center">
+                        Urutan Perkembangan Teknologi (Geser/Tukar Urutan)
+                    </div>
+
+                    <div id="timeline-slots" class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        <!-- Items rendered by JS -->
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap justify-between items-center gap-3">
+                    <button onclick="resetZone1()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm rounded-xl transition">
+                        <i class="fa-solid fa-rotate-left"></i> Acak Ulang
+                    </button>
+                    <button onclick="checkZone1()" class="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-base rounded-xl shadow-md transition hover:scale-105">
+                        <i class="fa-solid fa-check-circle"></i> Periksa Urutan
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- ZONA 2: TIK SEKARANG (EKSPLORASI MUSEUM/LAB DIGITAL) -->
+        <!-- ============================================================ -->
+        <section id="screen-zone-2" class="screen-view hidden transition-all duration-300">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100 max-w-4xl mx-auto space-y-6">
+                <div class="flex items-center justify-between border-b pb-4">
+                    <button onclick="showScreen('screen-map')" class="text-slate-600 hover:text-cyan-600 font-bold text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali ke Peta
+                    </button>
+                    <span class="text-xs font-bold bg-cyan-100 text-cyan-800 px-3 py-1 rounded-full">Zona 02 — TIK Sekarang</span>
+                </div>
+
+                <div>
+                    <h2 class="heading-font text-2xl font-extrabold text-slate-800">Teknologi di Sekitar Kita</h2>
+                    <p class="text-slate-600 text-sm mt-1">
+                        Klik pada setiap objek teknologi di bawah untuk membuka kartu informasi fungsinya dalam kehidupan sehari-hari!
+                    </p>
+                </div>
+
+                <!-- Interactive Devices Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4" id="zone2-devices">
+                    <!-- Injected by JS -->
+                </div>
+
+                <!-- Info Card Modal / Viewer -->
+                <div id="zone2-info-card" class="hidden bg-gradient-to-r from-cyan-50 to-blue-50 border-2 border-cyan-300 rounded-2xl p-5 space-y-3">
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-center gap-3">
+                            <div id="z2-card-icon" class="w-12 h-12 bg-cyan-500 text-white rounded-xl flex items-center justify-center text-2xl"></div>
+                            <div>
+                                <h3 id="z2-card-title" class="font-extrabold text-slate-800 text-lg">---</h3>
+                                <span id="z2-card-cat" class="text-xs font-bold text-cyan-700 bg-cyan-100 px-2.5 py-0.5 rounded-full">---</span>
+                            </div>
+                        </div>
+                        <button onclick="closeZone2Card()" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+                    </div>
+                    <p id="z2-card-desc" class="text-slate-700 text-sm leading-relaxed">---</p>
+                    <div class="bg-white p-3 rounded-xl border border-cyan-100 text-xs text-slate-600">
+                        <strong>Contoh Manfaat:</strong> <span id="z2-card-usage">---</span>
+                    </div>
+                </div>
+
+                <div class="flex justify-end">
+                    <button onclick="completeZone2()" class="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-base rounded-xl shadow-md transition hover:scale-105">
+                        Selesaikan Eksplorasi <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- ZONA 3: PERKAKAS TIK (DRAG & DROP KATEGORI) -->
+        <!-- ============================================================ -->
+        <section id="screen-zone-3" class="screen-view hidden transition-all duration-300">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100 max-w-5xl mx-auto space-y-6">
+                <div class="flex items-center justify-between border-b pb-4">
+                    <button onclick="showScreen('screen-map')" class="text-slate-600 hover:text-cyan-600 font-bold text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali ke Peta
+                    </button>
+                    <span class="text-xs font-bold bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Zona 03 — Perkakas TIK</span>
+                </div>
+
+                <div>
+                    <h2 class="heading-font text-2xl font-extrabold text-slate-800">Kenali Perkakas TIK!</h2>
+                    <p class="text-slate-600 text-sm mt-1">
+                        Klasifikasikan setiap perkakas keras/lunak ke dalam fungsi dasarnya: <strong>Input, Proses, Output, Storage, atau Komunikasi</strong>!
+                    </p>
+                </div>
+
+                <!-- Unclassified Items Pool -->
+                <div class="bg-slate-100 p-4 rounded-2xl border border-slate-200">
+                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-2">Pilihan Perangkat (Klik perangkat lalu pilih Kategori):</span>
+                    <div id="z3-items-pool" class="flex flex-wrap gap-2">
+                        <!-- Injected by JS -->
+                    </div>
+                </div>
+
+                <!-- Category Target Buckets -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3" id="z3-categories">
+                    <!-- Injected by JS -->
+                </div>
+
+                <div class="flex justify-between items-center">
+                    <button onclick="resetZone3()" class="px-4 py-2 bg-slate-100 text-slate-700 font-bold text-sm rounded-xl">
+                        <i class="fa-solid fa-rotate-left"></i> Reset
+                    </button>
+                    <button onclick="checkZone3()" class="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-base rounded-xl shadow-md">
+                        Cek Klasifikasi Perangkat
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- ZONA 4: PERKAKAS DIGITAL (APLIKASI) -->
+        <!-- ============================================================ -->
+        <section id="screen-zone-4" class="screen-view hidden transition-all duration-300">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100 max-w-4xl mx-auto space-y-6">
+                <div class="flex items-center justify-between border-b pb-4">
+                    <button onclick="showScreen('screen-map')" class="text-slate-600 hover:text-cyan-600 font-bold text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali ke Peta
+                    </button>
+                    <span class="text-xs font-bold bg-purple-100 text-purple-800 px-3 py-1 rounded-full">Zona 04 — Perkakas Digital</span>
+                </div>
+
+                <div>
+                    <h2 class="heading-font text-2xl font-extrabold text-slate-800">Dunia Digital di Tanganmu</h2>
+                    <p class="text-slate-600 text-sm mt-1">
+                        Ke mana aplikasi digital ini milik kelompoknya? Pilih kategori utama untuk tiap aplikasi!
+                    </p>
+                </div>
+
+                <!-- Apps Classification Grid -->
+                <div id="z4-apps-container" class="space-y-4">
+                    <!-- Injected by JS -->
+                </div>
+
+                <div class="flex justify-end">
+                    <button onclick="checkZone4()" class="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold text-base rounded-xl shadow-md">
+                        Simpan & Periksa Aplikasi
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- ZONA 5: TIK DALAM KEHIDUPAN (STUDI KASUS / HOTS) -->
+        <!-- ============================================================ -->
+        <section id="screen-zone-5" class="screen-view hidden transition-all duration-300">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100 max-w-3xl mx-auto space-y-6">
+                <div class="flex items-center justify-between border-b pb-4">
+                    <button onclick="showScreen('screen-map')" class="text-slate-600 hover:text-cyan-600 font-bold text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali ke Peta
+                    </button>
+                    <span class="text-xs font-bold bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">Zona 05 — TIK dalam Kehidupan</span>
+                </div>
+
+                <div>
+                    <h2 class="heading-font text-2xl font-extrabold text-slate-800">Teknologi untuk Menyelesaikan Masalah</h2>
+                    <p class="text-slate-600 text-sm mt-1">
+                        Bantu para karakter memilih perkakas TIK yang paling tepat untuk situasi kebutuhan mereka!
+                    </p>
+                </div>
+
+                <!-- Scenario Card -->
+                <div id="z5-scenario-box" class="bg-gradient-to-br from-slate-50 to-emerald-50 p-6 rounded-2xl border border-emerald-200 space-y-4">
+                    <div class="flex items-center gap-2 text-emerald-700 font-bold text-xs uppercase tracking-wider">
+                        <i class="fa-solid fa-lightbulb"></i> Skenario Studi Kasus <span id="z5-current-num">1</span>/5
+                    </div>
+                    <p id="z5-scenario-text" class="text-slate-800 text-base font-medium leading-relaxed">
+                        ---
+                    </p>
+
+                    <div id="z5-options" class="space-y-2 pt-2">
+                        <!-- Options injected by JS -->
+                    </div>
+                </div>
+
+                <!-- Feedback Area -->
+                <div id="z5-feedback" class="hidden p-4 rounded-xl text-sm font-medium"></div>
+
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-500 font-semibold">Skor Studi Kasus: +15 Poin tiap jawaban tepat!</span>
+                    <button id="z5-next-btn" onclick="nextZone5Scenario()" class="hidden px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow">
+                        Lanjut Skenario <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- ZONA 6: TIK AMAN & RAPI (KEAMANAN + MANAJEMEN FILE) -->
+        <!-- ============================================================ -->
+        <section id="screen-zone-6" class="screen-view hidden transition-all duration-300">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100 max-w-4xl mx-auto space-y-6">
+                <div class="flex items-center justify-between border-b pb-4">
+                    <button onclick="showScreen('screen-map')" class="text-slate-600 hover:text-cyan-600 font-bold text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali ke Peta
+                    </button>
+                    <span class="text-xs font-bold bg-orange-100 text-orange-800 px-3 py-1 rounded-full">Zona 06 — TIK Aman & Rapi</span>
+                </div>
+
+                <!-- Tabs Part 1 and Part 2 -->
+                <div class="flex border-b border-slate-200">
+                    <button onclick="switchZone6Tab('security')" id="z6-tab-security" class="px-4 py-2 font-bold text-sm border-b-2 border-orange-500 text-orange-600">
+                        1. Aman atau Berisiko?
+                    </button>
+                    <button onclick="switchZone6Tab('files')" id="z6-tab-files" class="px-4 py-2 font-bold text-sm border-b-2 border-transparent text-slate-500">
+                        2. Organisasi File
+                    </button>
+                </div>
+
+                <!-- PART 1: AMAN ATAU BERISIKO -->
+                <div id="z6-part-security" class="space-y-4">
+                    <p class="text-slate-600 text-sm">
+                        Evaluasi situasi digital berikut! Tentukan apakah perilaku ini <strong>AMAN / TEPAT</strong> atau <strong>BERISIKO / KURANG TEPAT</strong>.
+                    </p>
+                    <div id="z6-security-list" class="space-y-3">
+                        <!-- Injected by JS -->
+                    </div>
+                </div>
+
+                <!-- PART 2: MANAJEMEN FILE SIMULATOR -->
+                <div id="z6-part-files" class="hidden space-y-4">
+                    <p class="text-slate-600 text-sm">
+                        Rapikan dokumen digital ke dalam folder yang sesuai! Klik file lalu pilih folder tujuan.
+                    </p>
+
+                    <div class="bg-slate-100 p-4 rounded-2xl border border-slate-200">
+                        <span class="text-xs font-bold text-slate-500 uppercase block mb-2">File Belum Terorganisir:</span>
+                        <div id="z6-unorganized-files" class="flex flex-wrap gap-2">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+
+                    <div id="z6-folders-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        <!-- Folders injected by JS -->
+                    </div>
+                </div>
+
+                <div class="flex justify-end">
+                    <button onclick="completeZone6()" class="px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold text-base rounded-xl shadow-md">
+                        Selesaikan Zona 06
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- ZONA 7: MISI AKHIR (EVALUASI MASTER TIKLOPEDIA) -->
+        <!-- ============================================================ -->
+        <section id="screen-zone-7" class="screen-view hidden transition-all duration-300">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100 max-w-3xl mx-auto space-y-6">
+                <div class="flex items-center justify-between border-b pb-4">
+                    <button onclick="showScreen('screen-map')" class="text-slate-600 hover:text-cyan-600 font-bold text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali ke Peta
+                    </button>
+                    <span class="text-xs font-bold bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full">Zona 07 — Misi Akhir Evaluasi</span>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="heading-font text-2xl font-extrabold text-slate-800">Evaluasi Master TIKLOPEDIA</h2>
+                        <p class="text-slate-600 text-xs mt-0.5">Uji pemahaman komprehensif seluruh materi TIK.</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs font-bold text-slate-400 block">Soal</span>
+                        <span class="text-lg font-black text-cyan-600"><span id="z7-q-index">1</span>/10</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
+                    <p id="z7-question-text" class="text-slate-800 font-bold text-base leading-relaxed">---</p>
+                    <div id="z7-options-container" class="space-y-2">
+                        <!-- Options injected by JS -->
+                    </div>
+                </div>
+
+                <div id="z7-feedback" class="hidden p-4 rounded-xl text-sm font-medium"></div>
+
+                <div class="flex justify-between items-center">
+                    <button id="z7-next-btn" onclick="nextZone7Question()" class="hidden px-6 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-xl shadow ml-auto">
+                        Soal Berikutnya <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- SCREEN: REFLEKSI PEMBELAJARAN -->
+        <!-- ============================================================ -->
+        <section id="screen-reflection" class="screen-view hidden transition-all duration-300">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100 max-w-2xl mx-auto space-y-6">
+                <div class="text-center">
+                    <span class="text-xs font-bold text-teal-600 uppercase tracking-widest bg-teal-50 px-3 py-1 rounded-full">Evaluasi Diri</span>
+                    <h2 class="heading-font text-2xl sm:text-3xl font-extrabold text-slate-800 mt-2">Seberapa Jago Kamu Menggunakan TIK?</h2>
+                    <p class="text-slate-500 text-sm mt-1">Jawablah refleksi singkat ini sebelum menerima Gelar Penjelajah!</p>
+                </div>
+
+                <form onsubmit="submitReflection(event)" class="space-y-4 text-sm">
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">1. Perkakas TIK apa yang paling sering kamu gunakan sehari-hari?</label>
+                        <input type="text" required placeholder="Contoh: Smartphone / Laptop" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">2. Perubahan paling berkesan dari TIK masa lalu ke masa kini menurutmu?</label>
+                        <input type="text" required placeholder="Contoh: Dulu alat ukur/komunikasi lambat, sekarang serba cepat & digital" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">3. Bagaimana caramu menggunakan teknologi secara aman dan bijak?</label>
+                        <input type="text" required placeholder="Contoh: Jaga kerahasiaan kata sandi, tidak menyebar hoax" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                    </div>
+
+                    <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-teal-500 to-emerald-600 text-white font-bold text-base rounded-xl shadow-md transition hover:scale-[1.01]">
+                        Selesaikan Refleksi & Lihat Sertifikat <i class="fa-solid fa-trophy ml-1"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- SCREEN: HASIL AKHIR & SERTIFIKAT GELAR -->
+        <!-- ============================================================ -->
+        <section id="screen-result" class="screen-view hidden transition-all duration-300">
+            <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-2xl border-4 border-amber-200 max-w-3xl mx-auto text-center space-y-6 relative overflow-hidden">
+                <!-- Ribbon Graphic -->
+                <div class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-900 px-6 py-2 rounded-full font-black text-sm uppercase tracking-widest shadow-md">
+                    <i class="fa-solid fa-crown"></i> PETUALANGAN SELESAI!
+                </div>
+
+                <div class="space-y-2">
+                    <h2 class="heading-font text-3xl sm:text-4xl font-black text-slate-800">
+                        Sertifikat Pencapaian
+                    </h2>
+                    <p class="text-slate-500 text-sm font-semibold">Diberikan kepada Penjelajah TIKLOPEDIA:</p>
+                    <div id="res-player-name" class="text-2xl sm:text-3xl font-extrabold text-cyan-600 underline decoration-cyan-300">
+                        Nama Peserta
+                    </div>
+                    <div id="res-player-class" class="text-sm font-bold text-slate-600">
+                        Kelas VII | Absen --
+                    </div>
+                </div>
+
+                <!-- Stats summary grid -->
+                <div class="grid grid-cols-3 gap-3 max-w-md mx-auto bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                    <div>
+                        <span class="text-xs text-slate-400 font-bold block">TOTAL POIN</span>
+                        <span id="res-total-score" class="text-2xl font-black text-amber-500">0</span>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-400 font-bold block">ZONA SELESAI</span>
+                        <span id="res-total-zones" class="text-2xl font-black text-cyan-500">7/7</span>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-400 font-bold block">LENCANA</span>
+                        <span id="res-total-badges" class="text-2xl font-black text-emerald-500">6/6</span>
+                    </div>
+                </div>
+
+                <!-- Earned Badges Container -->
+                <div class="space-y-2">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Koleksi Lencana Keahlian</span>
+                    <div id="res-badges-list" class="flex flex-wrap justify-center gap-2">
+                        <!-- Badges injected by JS -->
+                    </div>
+                </div>
+
+                <!-- Title Achievement -->
+                <div class="bg-gradient-to-r from-cyan-50 to-amber-50 p-4 rounded-2xl border border-amber-200">
+                    <span class="text-xs text-slate-500 font-bold uppercase block">Gelar Resmi</span>
+                    <span class="text-xl font-black text-amber-600 heading-font">“PENJELAJAH TIKLOPEDIA MASTER”</span>
+                    <p class="text-xs text-slate-600 mt-2 italic">
+                        “Teknologi bukan hanya untuk digunakan, tetapi untuk dipahami, dimanfaatkan, dan digunakan secara bijak.”
+                    </p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap justify-center gap-3 pt-2">
+                    <button onclick="restartAdventure()" class="px-6 py-3 bg-cyan-600 hover:bg-cyan-700 text-white font-bold rounded-xl shadow-md transition">
+                        <i class="fa-solid fa-rotate-right"></i> Ulangi Petualangan
+                    </button>
+                    <button onclick="window.print()" class="px-6 py-3 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded-xl shadow-md transition">
+                        <i class="fa-solid fa-print"></i> Cetak / Simpan Sertifikat
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODAL: PANDUAN -->
+    <div id="modal-guide" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full space-y-4 max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <div class="flex items-center justify-between border-b pb-3">
+                <h3 class="font-bold text-lg text-slate-800"><i class="fa-solid fa-book text-cyan-500 mr-2"></i>Panduan Bermain</h3>
+                <button onclick="closeModal('modal-guide')" class="text-slate-400 hover:text-slate-600 text-2xl font-bold">&times;</button>
+            </div>
+            <ul class="text-sm text-slate-600 space-y-2.5 list-disc pl-5">
+                <li>Masukkan data profil awal (Nama, Kelas, Absen) dan pilih Avatar favoritmu.</li>
+                <li>Jelajahi Peta TIKLOPEDIA berurutan dari Zona 1 hingga Zona 7.</li>
+                <li>Setiap zona menyajikan tantangan interaktif: urutkan timeline, klasifikasikan perangkat, selesaikan studi kasus, dan rapikan file digital.</li>
+                <li>Kumpulkan <strong>Poin ⭐</strong> dan buka <strong>Lencana Keahlian 🏆</strong> di setiap zona!</li>
+            </ul>
+            <button onclick="closeModal('modal-guide')" class="w-full py-2.5 bg-cyan-500 text-white font-bold rounded-xl">Saya Mengerti</button>
+        </div>
+    </div>
+
+    <!-- MODAL: TENTANG -->
+    <div id="modal-about" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full space-y-4">
+            <div class="flex items-center justify-between border-b pb-3">
+                <h3 class="font-bold text-lg text-slate-800"><i class="fa-solid fa-info-circle text-blue-500 mr-2"></i>Tentang TIKLOPEDIA</h3>
+                <button onclick="closeModal('modal-about')" class="text-slate-400 hover:text-slate-600 text-2xl font-bold">&times;</button>
+            </div>
+            <div class="text-sm text-slate-600 space-y-2">
+                <p><strong>Judul:</strong> TIKLOPEDIA — Ensiklopedia TIK: Dulu, Kini, dan Nanti</p>
+                <p><strong>Mata Pelajaran:</strong> Informatika (Fase D / Kelas VII SMP)</p>
+                <p><strong>Materi:</strong> Perkakas Teknologi Informasi dan Komunikasi</p>
+                <p><strong>Kreator:</strong> Sesi Mulyasi, M.Pd.</p>
+                <p class="pt-2 text-xs text-slate-500 border-t">
+                    Media ini dikembangkan untuk memfasilitasi pembelajaran eksploratif, pemahaman perangkat keras, aplikasi digital, serta etika dan tata kelola file digital secara sistematis.
+                </p>
+            </div>
+            <button onclick="closeModal('modal-about')" class="w-full py-2.5 bg-slate-800 text-white font-bold rounded-xl">Tutup</button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-white/80 border-t border-slate-200 py-4 px-4 text-center text-xs text-slate-500">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+            <span>© 2026 TIKLOPEDIA — Sesi Mulyasi, M.Pd. | Informatika SMP Kelas VII</span>
+            <span class="text-slate-400">Fase D • Kurikulum Merdeka</span>
+        </div>
+    </footer>
+
+    <script>
+        /* ============================================================
+           GAME STATE & DATA STRUCTURES
+           ============================================================ */
+        const gameState = {
+            player: {
+                name: '',
+                class: '',
+                absen: '',
+                avatar: 'Teknisi'
+            },
+            score: 0,
+            progress: 0,
+            completedZones: [],
+            badges: [],
+            zone1State: [],
+            zone3Placed: {},
+            zone4Answers: {},
+            zone5Index: 0,
+            zone5Score: 0,
+            zone6SecurityAnswers: {},
+            zone6FilesPlaced: {},
+            zone7Index: 0,
+            zone7Score: 0
+        };
+
+        const AVATARS = [
+            { id: 'Teknisi', name: 'Teknisi', icon: 'fa-wrench', color: 'bg-cyan-500' },
+            { id: 'Kreator', name: 'Kreator', icon: 'fa-palette', color: 'bg-purple-500' },
+            { id: 'Penjelajah', name: 'Penjelajah', icon: 'fa-compass', color: 'bg-emerald-500' },
+            { id: 'Detektif TIK', name: 'Detektif TIK', icon: 'fa-user-secret', color: 'bg-amber-500' }
+        ];
+
+        const BADGES = {
+            b1: { id: 'b1', name: 'Detektif TIK', icon: 'fa-magnifying-glass', desc: 'Berhasil mengenali perkakas TIK.' },
+            b2: { id: 'b2', name: 'Penjelajah Sejarah', icon: 'fa-hourglass-half', desc: 'Menyusun timeline perkembangan TIK.' },
+            b3: { id: 'b3', name: 'Ahli Perkakas', icon: 'fa-laptop-code', desc: 'Mengelompokkan perangkat TIK.' },
+            b4: { id: 'b4', name: 'Digital Explorer', icon: 'fa-mobile-screen', desc: 'Mengenali kelompok aplikasi digital.' },
+            b5: { id: 'b5', name: 'Smart User', icon: 'fa-shield-halved', desc: 'Menyelesaikan tantangan keamanan digital.' },
+            b6: { id: 'b6', name: 'Master TIKLOPEDIA', icon: 'fa-trophy', desc: 'Menuntaskan seluruh misi pembelajaran.' }
+        };
+
+        const ZONES_DATA = [
+            { id: 1, title: '01 TIK DULU', sub: 'Jejak Sejarah Teknologi', icon: 'fa-clock-rotate-left', color: 'from-amber-400 to-orange-500' },
+            { id: 2, title: '02 TIK SEKARANG', sub: 'Teknologi Sekitar Kita', icon: 'fa-house-laptop', color: 'from-cyan-400 to-blue-500' },
+            { id: 3, title: '03 PERKAKAS TIK', sub: 'Kenali Jenis & Fungsi', icon: 'fa-keyboard', color: 'from-blue-500 to-indigo-600' },
+            { id: 4, title: '04 PERKAKAS DIGITAL', sub: 'Aplikasi Komunikasi & Kerja', icon: 'fa-mobile-retro', color: 'from-purple-500 to-pink-500' },
+            { id: 5, title: '05 TIK KEHIDUPAN', sub: 'Solusi Masalah Nyata', icon: 'fa-lightbulb', color: 'from-emerald-400 to-teal-600' },
+            { id: 6, title: '06 TIK AMAN & RAPI', sub: 'Keamanan & Tata Kelola File', icon: 'fa-folder-tree', color: 'from-orange-500 to-amber-600' },
+            { id: 7, title: '07 MISI AKHIR', sub: 'Evaluasi Master TIKLOPEDIA', icon: 'fa-flag-checkered', color: 'from-rose-500 to-red-600' }
+        ];
+
+        /* ============================================================
+           AUDIO FEEDBACK GENERATOR (Web Audio API)
+           ============================================================ */
+        function playSound(type) {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                if (type === 'correct') {
+                    osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
+                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1); // E5
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.25);
+                } else if (type === 'wrong') {
+                    osc.frequency.setValueAtTime(220, ctx.currentTime); // A3
+                    osc.frequency.setValueAtTime(180, ctx.currentTime + 0.1);
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.25);
+                } else if (type === 'badge') {
+                    osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+                    osc.frequency.setValueAtTime(880, ctx.currentTime + 0.15);
+                    gain.gain.setValueAtTime(0.25, ctx.currentTime);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.35);
+                }
+            } catch(e) { console.log('Audio not supported'); }
+        }
+
+        /* ============================================================
+           NAVIGATION & UI HELPERS
+           ============================================================ */
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen-view').forEach(s => s.classList.add('hidden'));
+            const target = document.getElementById(screenId);
+            if(target) target.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function openModal(id) {
+            const m = document.getElementById(id);
+            if(m) { m.classList.remove('hidden'); m.classList.add('flex'); }
+        }
+
+        function closeModal(id) {
+            const m = document.getElementById(id);
+            if(m) { m.classList.add('hidden'); m.classList.remove('flex'); }
+        }
+
+        /* ============================================================
+           PROFILE & AVATAR INIT
+           ============================================================ */
+        function initAvatarSelector() {
+            const container = document.getElementById('avatar-selector');
+            container.innerHTML = AVATARS.map(a => `
+                <label class="cursor-pointer">
+                    <input type="radio" name="avatar_opt" value="${a.id}" ${a.id === 'Teknisi' ? 'checked' : ''} class="peer sr-only">
+                    <div class="p-3 rounded-2xl border-2 border-slate-200 peer-checked:border-cyan-500 peer-checked:bg-cyan-50 text-center transition flex flex-col items-center gap-1.5">
+                        <div class="w-10 h-10 ${a.color} text-white rounded-xl flex items-center justify-center text-lg">
+                            <i class="fa-solid ${a.icon}"></i>
+                        </div>
+                        <span class="text-xs font-bold text-slate-700">${a.name}</span>
+                    </div>
+                </label>
+            `).join('');
+        }
+
+        function saveProfile(e) {
+            e.preventDefault();
+            gameState.player.name = document.getElementById('input-nama').value.trim();
+            gameState.player.class = document.getElementById('input-kelas').value.trim();
+            gameState.player.absen = document.getElementById('input-absen').value.trim();
+            
+            const selectedAv = document.querySelector('input[name="avatar_opt"]:checked');
+            if(selectedAv) gameState.player.avatar = selectedAv.value;
+
+            // Update UI elements
+            document.getElementById('header-stats').classList.remove('hidden');
+            document.getElementById('map-player-name').textContent = gameState.player.name;
+            document.getElementById('map-player-info').textContent = `Kelas ${gameState.player.class} | Absen No. ${gameState.player.absen}`;
+            
+            const avObj = AVATARS.find(a => a.id === gameState.player.avatar) || AVATARS[0];
+            document.getElementById('map-avatar-icon').className = `w-14 h-14 rounded-2xl ${avObj.color} flex items-center justify-center text-white text-2xl shadow-md`;
+            document.getElementById('map-avatar-icon').innerHTML = `<i class="fa-solid ${avObj.icon}"></i>`;
+
+            renderMap();
+            showScreen('screen-map');
+            playSound('correct');
+        }
+
+        /* ============================================================
+           PETA ZONA (MAP) RENDERER
+           ============================================================ */
+        function renderMap() {
+            const container = document.getElementById('zones-grid');
+            
+            // Calculate progress
+            const total = ZONES_DATA.length;
+            const done = gameState.completedZones.length;
+            const pct = Math.round((done / total) * 100);
+            
+            document.getElementById('map-progress-text').textContent = `${pct}%`;
+            document.getElementById('map-progress-bar').style.width = `${pct}%`;
+            document.getElementById('player-score-display').textContent = gameState.score;
+            document.getElementById('player-badge-count').textContent = gameState.badges.length;
+
+            container.innerHTML = ZONES_DATA.map((z, idx) => {
+                const isDone = gameState.completedZones.includes(z.id);
+                // Zone unlocked if it's zone 1 or previous zone is completed
+                const isUnlocked = idx === 0 || gameState.completedZones.includes(ZONES_DATA[idx-1].id);
+
+                return `
+                    <div class="bg-white rounded-2xl p-5 border-2 ${isDone ? 'border-emerald-400 bg-emerald-50/30' : isUnlocked ? 'border-slate-200 hover:border-cyan-400 shadow-sm' : 'border-slate-200 opacity-60'} transition relative flex flex-col justify-between space-y-4">
+                        <div class="flex items-start justify-between">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr ${z.color} flex items-center justify-center text-white text-xl shadow-md">
+                                <i class="fa-solid ${z.icon}"></i>
+                            </div>
+                            ${isDone ? '<span class="bg-emerald-500 text-white text-xs font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-check"></i> Selesai</span>' : 
+                              isUnlocked ? '<span class="bg-cyan-100 text-cyan-800 text-xs font-bold px-2.5 py-1 rounded-full">Terbuka</span>' : 
+                              '<span class="bg-slate-200 text-slate-600 text-xs font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-lock"></i> Terkunci</span>'}
+                        </div>
+
+                        <div>
+                            <h4 class="font-extrabold text-slate-800 text-lg heading-font">${z.title}</h4>
+                            <p class="text-xs text-slate-500 mt-0.5">${z.sub}</p>
+                        </div>
+
+                        <button ${isUnlocked ? `onclick="openZone(${z.id})"` : 'disabled'} class="w-full py-2.5 rounded-xl font-bold text-sm ${isUnlocked ? 'bg-slate-900 hover:bg-cyan-600 text-white shadow' : 'bg-slate-200 text-slate-400 cursor-not-allowed'} transition">
+                            ${isDone ? 'Ulangi Zona' : isUnlocked ? 'Mulai Zona' : 'Selesaikan Zona Sebelumnya'}
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function openZone(id) {
+            playSound('correct');
+            if(id === 1) { initZone1(); showScreen('screen-zone-1'); }
+            else if(id === 2) { initZone2(); showScreen('screen-zone-2'); }
+            else if(id === 3) { initZone3(); showScreen('screen-zone-3'); }
+            else if(id === 4) { initZone4(); showScreen('screen-zone-4'); }
+            else if(id === 5) { initZone5(); showScreen('screen-zone-5'); }
+            else if(id === 6) { initZone6(); showScreen('screen-zone-6'); }
+            else if(id === 7) { initZone7(); showScreen('screen-zone-7'); }
+        }
+
+        function markZoneComplete(zoneId, bonusPoin, badgeKey) {
+            if(!gameState.completedZones.includes(zoneId)) {
+                gameState.completedZones.push(zoneId);
+                gameState.score += bonusPoin;
+            }
+            if(badgeKey && !gameState.badges.includes(badgeKey)) {
+                gameState.badges.push(badgeKey);
+                playSound('badge');
+            }
+            renderMap();
+        }
+
+        /* ============================================================
+           ZONA 1: TIMELINE TIMELINE INTERAKTIF
+           ============================================================ */
+        const ZONE1_ITEMS = [
+            { id: 't1', name: 'Surat Analog', era: 'Era Sejarah', icon: 'fa-envelope' },
+            { id: 't2', name: 'Mesin Tik', era: 'Masa Mekanik', icon: 'fa-keyboard' },
+            { id: 't3', name: 'Komputer Desktop', era: 'Era Digital Awal', icon: 'fa-desktop' },
+            { id: 't4', name: 'Smartphone & Cloud', era: 'Era Digital Modern', icon: 'fa-mobile-screen-button' }
+        ];
+
+        function initZone1() {
+            if(!gameState.zone1State || gameState.zone1State.length === 0) {
+                // Shuffle array initially
+                gameState.zone1State = [...ZONE1_ITEMS].sort(() => Math.random() - 0.5);
+            }
+            renderZone1();
+        }
+
+        function resetZone1() {
+            gameState.zone1State = [...ZONE1_ITEMS].sort(() => Math.random() - 0.5);
+            renderZone1();
+        }
+
+        function renderZone1() {
+            const container = document.getElementById('timeline-slots');
+            container.innerHTML = gameState.zone1State.map((item, idx) => `
+                <div class="bg-white p-4 rounded-xl border-2 border-slate-200 shadow-sm flex flex-col items-center justify-between text-center space-y-3 cursor-pointer hover:border-cyan-400 transition" onclick="swapZone1(${idx})">
+                    <span class="text-[10px] font-black bg-cyan-100 text-cyan-800 px-2 py-0.5 rounded-full">Langkah ${idx+1}</span>
+                    <div class="w-12 h-12 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center text-2xl">
+                        <i class="fa-solid ${item.icon}"></i>
+                    </div>
+                    <div>
+                        <span class="font-bold text-slate-800 text-sm block">${item.name}</span>
+                        <span class="text-[10px] text-slate-400">${item.era}</span>
+                    </div>
+                    <span class="text-[10px] text-slate-400 font-semibold">(Klik untuk tukar)</span>
+                </div>
+            `).join('');
+        }
+
+        let selectedZone1Idx = null;
+        function swapZone1(idx) {
+            if(selectedZone1Idx === null) {
+                selectedZone1Idx = idx;
+                alert(`Pilih item kedua untuk menukar posisi dengan "${gameState.zone1State[idx].name}"`);
+            } else {
+                const temp = gameState.zone1State[selectedZone1Idx];
+                gameState.zone1State[selectedZone1Idx] = gameState.zone1State[idx];
+                gameState.zone1State[idx] = temp;
+                selectedZone1Idx = null;
+                renderZone1();
+            }
+        }
+
+        function checkZone1() {
+            const correctOrder = ['t1', 't2', 't3', 't4'];
+            const currentOrder = gameState.zone1State.map(i => i.id);
+            const isCorrect = JSON.stringify(correctOrder) === JSON.stringify(currentOrder);
+
+            if(isCorrect) {
+                playSound('correct');
+                markZoneComplete(1, 20, 'b2');
+                alert("Hebat! Urutan teknologi dari masa lalu hingga era modern kamu BENAR!\n+20 Poin ⭐ | Lencana Penjelajah Sejarah diraih! 🏆");
+                showScreen('screen-map');
+            } else {
+                playSound('wrong');
+                alert("Belum tepat. Perhatikan kembali urutan evolusi dari surat analog, mesin tik, komputer desktop, hingga smartphone & cloud!");
+            }
+        }
+
+        /* ============================================================
+           ZONA 2: MUSEUM EKSPLORASI SEKARANG
+           ============================================================ */
+        const ZONE2_DEVICES = [
+            { id: 'd1', name: 'Laptop', icon: 'fa-laptop', cat: 'Produktivitas', desc: 'Komputer jinjing dengan baterai terintegrasi untuk bekerja dan belajar di mana saja.', usage: 'Membuat dokumen tugas, olah data, presentasi.' },
+            { id: 'd2', name: 'Smartphone', icon: 'fa-mobile-screen', cat: 'Komunikasi & Hiburan', desc: 'Perangkat genggam pintar yang menggabungkan fungsi seluler dan komputasi.', usage: 'Pesan instan, kamera, navigasi, aplikasi digital.' },
+            { id: 'd3', name: 'Printer', icon: 'fa-print', cat: 'Output', desc: 'Perangkat cetak yang mengubah file digital menjadi bentuk cetakan kertas.', usage: 'Mencetak dokumen laporan dan foto.' },
+            { id: 'd4', name: 'Smart TV', icon: 'fa-tv', cat: 'Hiburan', desc: 'Televisi berbasis internet yang menjalankan berbagai aplikasi media.', usage: 'Streaming video edukasi, berita, hiburan.' },
+            { id: 'd5', name: 'Cloud Storage', icon: 'fa-cloud', cat: 'Penyimpanan Digital', desc: 'Layanan simpan data berbasis server jaringan internet.', usage: 'Backup data tugas agar tidak hilang dan dapat diakses dari mana saja.' },
+            { id: 'd6', name: 'Webcam', icon: 'fa-video', cat: 'Input Komunikasi', desc: 'Kamera video terhubung komputer untuk menangkap citra visual real-time.', usage: 'Pembelajaran jarak jauh & konferensi video.' },
+            { id: 'd7', name: 'Wi-Fi Router', icon: 'fa-wifi', cat: 'Jaringan Komunikasi', desc: 'Perangkat pengarah lalu lintas data nirkabel internet.', usage: 'Menghubungkan banyak perangkat ke internet.' },
+            { id: 'd8', name: 'Smartwatch', icon: 'fa-clock', cat: 'Perangkat Wearable', desc: 'Jam tangan pintar pendeteksi kesehatan & notifikasi.', usage: 'Memantau langkah kaki dan pesan masuk.' }
+        ];
+
+        let visitedZ2Count = 0;
+        function initZone2() {
+            const grid = document.getElementById('zone2-devices');
+            grid.innerHTML = ZONE2_DEVICES.map(d => `
+                <div onclick="openZone2Card('${d.id}')" class="bg-slate-50 hover:bg-cyan-50 border-2 border-slate-200 hover:border-cyan-400 p-4 rounded-2xl flex flex-col items-center text-center cursor-pointer transition transform hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500 text-white flex items-center justify-center text-2xl mb-2">
+                        <i class="fa-solid ${d.icon}"></i>
+                    </div>
+                    <span class="font-bold text-slate-800 text-sm">${d.name}</span>
+                    <span class="text-[10px] text-cyan-600 font-semibold">${d.cat}</span>
+                </div>
+            `).join('');
+        }
+
+        function openZone2Card(id) {
+            playSound('correct');
+            visitedZ2Count++;
+            const d = ZONE2_DEVICES.find(item => item.id === id);
+            document.getElementById('z2-card-icon').innerHTML = `<i class="fa-solid ${d.icon}"></i>`;
+            document.getElementById('z2-card-title').textContent = d.name;
+            document.getElementById('z2-card-cat').textContent = d.cat;
+            document.getElementById('z2-card-desc').textContent = d.desc;
+            document.getElementById('z2-card-usage').textContent = d.usage;
+            document.getElementById('zone2-info-card').classList.remove('hidden');
+        }
+
+        function closeZone2Card() {
+            document.getElementById('zone2-info-card').classList.add('hidden');
+        }
+
+        function completeZone2() {
+            if(visitedZ2Count >= 3) {
+                playSound('correct');
+                markZoneComplete(2, 20, 'b1');
+                alert("Luar biasa! Kamu telah mengamati fungsi berbagai perkakas TIK di sekitar kita!\n+20 Poin ⭐ | Lencana Detektif TIK diraih! 🏆");
+                showScreen('screen-map');
+            } else {
+                alert("Jelajahi minimal 3 perangkat teknologi terlebih dahulu sebelum melanjutkan!");
+            }
+        }
+
+        /* ============================================================
+           ZONA 3: CLASSIFIER PERKAKAS HARDWARE
+           ============================================================ */
+        const HARDWARE_ITEMS = [
+            { id: 'hw1', name: 'Keyboard', cat: 'Input', icon: 'fa-keyboard' },
+            { id: 'hw2', name: 'Mouse', cat: 'Input', icon: 'fa-mouse' },
+            { id: 'hw3', name: 'Prosesor CPU', cat: 'Proses', icon: 'fa-microchip' },
+            { id: 'hw4', name: 'Monitor', cat: 'Output', icon: 'fa-desktop' },
+            { id: 'hw5', name: 'Printer', cat: 'Output', icon: 'fa-print' },
+            { id: 'hw6', name: 'Flashdisk', cat: 'Penyimpanan', icon: 'fa-hard-drive' },
+            { id: 'hw7', name: 'Router Wi-Fi', cat: 'Komunikasi', icon: 'fa-wifi' }
+        ];
+
+        const Z3_CATEGORIES = ['Input', 'Proses', 'Output', 'Penyimpanan', 'Komunikasi'];
+        let selectedItemZ3 = null;
+
+        function initZone3() {
+            gameState.zone3Placed = {};
+            selectedItemZ3 = null;
+            renderZone3();
+        }
+
+        function resetZone3() {
+            initZone3();
+        }
+
+        function renderZone3() {
+            // Render unplaced pool
+            const pool = document.getElementById('z3-items-pool');
+            const unplaced = HARDWARE_ITEMS.filter(item => !gameState.zone3Placed[item.id]);
+
+            pool.innerHTML = unplaced.map(item => `
+                <button onclick="selectZ3Item('${item.id}')" class="px-3 py-2 bg-white border-2 ${selectedItemZ3 === item.id ? 'border-cyan-500 bg-cyan-50' : 'border-slate-300'} rounded-xl font-bold text-xs flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid ${item.icon} text-cyan-600"></i> ${item.name}
+                </button>
+            `).join('');
+
+            // Render categories
+            const catContainer = document.getElementById('z3-categories');
+            catContainer.innerHTML = Z3_CATEGORIES.map(cat => {
+                const placedItems = HARDWARE_ITEMS.filter(item => gameState.zone3Placed[item.id] === cat);
+                return `
+                    <div onclick="placeZ3Item('${cat}')" class="bg-slate-50 border-2 border-dashed border-slate-300 hover:border-blue-400 p-3 rounded-2xl min-h-[120px] flex flex-col justify-between cursor-pointer">
+                        <span class="text-xs font-black text-slate-700 uppercase tracking-wider block text-center border-b pb-1">${cat}</span>
+                        <div class="space-y-1 my-2">
+                            ${placedItems.map(pi => `
+                                <div class="bg-blue-600 text-white px-2 py-1 rounded-lg text-xs font-bold flex items-center justify-between">
+                                    <span>${pi.name}</span>
+                                    <button onclick="event.stopPropagation(); removeZ3Item('${pi.id}')" class="text-white hover:text-red-200 font-bold">&times;</button>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <span class="text-[10px] text-slate-400 text-center block">Klik untuk memasukkan</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function selectZ3Item(id) {
+            selectedItemZ3 = id;
+            renderZone3();
+        }
+
+        function placeZ3Item(cat) {
+            if(!selectedItemZ3) {
+                alert("Pilih perangkat terlebih dahulu dari kotak atas!");
+                return;
+            }
+            gameState.zone3Placed[selectedItemZ3] = cat;
+            selectedItemZ3 = null;
+            renderZone3();
+        }
+
+        function removeZ3Item(id) {
+            delete gameState.zone3Placed[id];
+            renderZone3();
+        }
+
+        function checkZone3() {
+            let correctCount = 0;
+            HARDWARE_ITEMS.forEach(item => {
+                if(gameState.zone3Placed[item.id] === item.cat) correctCount++;
+            });
+
+            if(correctCount === HARDWARE_ITEMS.length) {
+                playSound('correct');
+                markZoneComplete(3, 20, 'b3');
+                alert("Sempurna! Seluruh perkakas TIK berhasil dikelompokkan dengan TEPAT!\n+20 Poin ⭐ | Lencana Ahli Perkakas diraih! 🏆");
+                showScreen('screen-map');
+            } else {
+                playSound('wrong');
+                alert(`Masih ada yang belum sesuai (${correctCount}/${HARDWARE_ITEMS.length} tepat). Periksa fungsi Input, Proses, Output, Storage, & Komunikasi!`);
+            }
+        }
+
+        /* ============================================================
+           ZONA 4: APLIKASI DIGITAL
+           ============================================================ */
+        const APP_ITEMS = [
+            { id: 'app1', name: 'WhatsApp & Email', icon: 'fa-comments' },
+            { id: 'app2', name: 'Google Docs & Word', icon: 'fa-file-lines' },
+            { id: 'app3', name: 'YouTube & Spotify', icon: 'fa-play' },
+            { id: 'app4', name: 'Canva & Spreadsheet', icon: 'fa-chart-pie' }
+        ];
+
+        function initZone4() {
+            const container = document.getElementById('z4-apps-container');
+            container.innerHTML = APP_ITEMS.map(app => `
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-purple-500 text-white flex items-center justify-center text-lg">
+                            <i class="fa-solid ${app.icon}"></i>
+                        </div>
+                        <span class="font-bold text-slate-800 text-sm">${app.name}</span>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="z4_${app.id}" value="Komunikasi" class="peer sr-only">
+                            <span class="px-3 py-1.5 rounded-xl border border-slate-300 text-xs font-bold peer-checked:bg-purple-600 peer-checked:text-white peer-checked:border-purple-600 block transition">
+                                📱 Komunikasi
+                            </span>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="z4_${app.id}" value="Produktivitas" class="peer sr-only">
+                            <span class="px-3 py-1.5 rounded-xl border border-slate-300 text-xs font-bold peer-checked:bg-purple-600 peer-checked:text-white peer-checked:border-purple-600 block transition">
+                                💼 Produktivitas
+                            </span>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="z4_${app.id}" value="Hiburan" class="peer sr-only">
+                            <span class="px-3 py-1.5 rounded-xl border border-slate-300 text-xs font-bold peer-checked:bg-purple-600 peer-checked:text-white peer-checked:border-purple-600 block transition">
+                                🎮 Hiburan
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function checkZone4() {
+            const answers = {
+                app1: 'Komunikasi',
+                app2: 'Produktivitas',
+                app3: 'Hiburan',
+                app4: 'Produktivitas'
+            };
+
+            let allCorrect = true;
+            APP_ITEMS.forEach(app => {
+                const checked = document.querySelector(`input[name="z4_${app.id}"]:checked`);
+                if(!checked || checked.value !== answers[app.id]) allCorrect = false;
+            });
+
+            if(allCorrect) {
+                playSound('correct');
+                markZoneComplete(4, 20, 'b4');
+                alert("Hebat! Kamu mengenali kategori aplikasi digital dengan baik!\n+20 Poin ⭐ | Lencana Digital Explorer diraih! 🏆");
+                showScreen('screen-map');
+            } else {
+                playSound('wrong');
+                alert("Beberapa kelompok aplikasi masih keliru. Pastikan mencocokkan fungsi utama aplikasi tersebut!");
+            }
+        }
+
+        /* ============================================================
+           ZONA 5: STUDI KASUS KEHIDUPAN (HOTS)
+           ============================================================ */
+        const SCENARIOS_Z5 = [
+            {
+                q: "Mila ingin menyusun laporan kelompok bersama temannya yang berada di rumah secara bersamaan (real-time). Perkakas mana yang paling pas?",
+                opts: ["A. Aplikasi kamera digital", "B. Aplikasi kolaborasi dokumen cloud (Google Docs)", "C. Speaker nirkabel", "D. Kalkulator digital"],
+                ans: 1,
+                feedback: "Benar! Dokumen berbasis Cloud memungkinkan beberapa siswa bekerja bersama secara langsung dari tempat berbeda!"
+            },
+            {
+                q: "Dina ingin mencetak karya poster digitalnya ke kertas untuk ditempel di majalah dinding sekolah. Alat mana yang digunakan?",
+                opts: ["A. Monitor", "B. Printer", "C. Scanner", "D. Router"],
+                ans: 1,
+                feedback: "Tepat! Printer adalah perkakas Output yang menghasilkan dokumen fisik dari file digital."
+            },
+            {
+                q: "Reno ingin menyimpan dokumen laporan penting agar tidak hilang jika laptop terkena virus dan bisa dibuka dari smartphone. Solusi terbaik?",
+                opts: ["A. Simpan di Cloud Storage (Google Drive)", "B. Foto layar laptop pakai HP", "C. Cetak 100 lembar", "D. Simpan di folder Recycle Bin"],
+                ans: 0,
+                feedback: "Sangat tepat! Cloud storage menjaga data tetap aman dan terhubung di berbagai perangkat."
+            },
+            {
+                q: "Guru ingin menampilkan presentasi materi pembelajaran agar dapat dilihat oleh seluruh siswa di depan kelas. Perkakas yang sesuai?",
+                opts: ["A. Projector (Proyektor)", "B. Harddisk eksternal", "C. Microphone", "D. Mouse gaming"],
+                ans: 0,
+                feedback: "Hebat! Proyektor memancarkan tampilan layar komputer ke layar besar agar terlihat oleh seluruh kelas."
+            },
+            {
+                q: "Untuk merekam audio suara saat membuat podcast tugas sekolah, perkakas input yang tepat adalah...",
+                opts: ["A. Speaker", "B. Microphone", "C. Monitor", "D. Flashdisk"],
+                ans: 1,
+                feedback: "Benar! Microphone mengubah gelombang suara menjadi sinyal audio digital."
+            }
+        ];
+
+        function initZone5() {
+            gameState.zone5Index = 0;
+            renderZone5Scenario();
+        }
+
+        function renderZone5Scenario() {
+            const sc = SCENARIOS_Z5[gameState.zone5Index];
+            document.getElementById('z5-current-num').textContent = gameState.zone5Index + 1;
+            document.getElementById('z5-scenario-text').textContent = sc.q;
+            document.getElementById('z5-feedback').className = "hidden p-4 rounded-xl text-sm font-medium";
+            document.getElementById('z5-next-btn').classList.add('hidden');
+
+            const optsBox = document.getElementById('z5-options');
+            optsBox.innerHTML = sc.opts.map((opt, i) => `
+                <button onclick="answerZone5(${i})" class="w-full text-left p-3 rounded-xl border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 font-bold text-sm text-slate-700 transition">
+                    ${opt}
+                </button>
+            `).join('');
+        }
+
+        function answerZone5(chosen) {
+            const sc = SCENARIOS_Z5[gameState.zone5Index];
+            const fb = document.getElementById('z5-feedback');
+            fb.classList.remove('hidden');
+
+            if(chosen === sc.ans) {
+                playSound('correct');
+                gameState.score += 15;
+                fb.className = "p-4 rounded-xl text-sm font-bold bg-emerald-100 text-emerald-800 border border-emerald-300";
+                fb.textContent = `✓ ${sc.feedback} (+15 Poin HOTS)`;
+            } else {
+                playSound('wrong');
+                fb.className = "p-4 rounded-xl text-sm font-bold bg-red-100 text-red-800 border border-red-300";
+                fb.textContent = "✕ Belum tepat. Coba pahami kembali fungsi perkakas digital yang paling efisien!";
+            }
+
+            document.getElementById('z5-next-btn').classList.remove('hidden');
+        }
+
+        function nextZone5Scenario() {
+            gameState.zone5Index++;
+            if(gameState.zone5Index < SCENARIOS_Z5.length) {
+                renderZone5Scenario();
+            } else {
+                markZoneComplete(5, 20, 'b5');
+                alert("Selamat! Kamu berhasil menyelesaikan seluruh studi kasus pemecahan masalah TIK!\n+20 Poin Zona ⭐");
+                showScreen('screen-map');
+            }
+        }
+
+        /* ============================================================
+           ZONA 6: KEAMANAN & PENGELOLAAN FILE
+           ============================================================ */
+        const SECURITY_ITEMS = [
+            { id: 's1', text: 'Budi memakai kata sandi "123456" untuk semua akun media sosial dan emailnya.', ans: 'BERISIKO', fb: 'Password lemah dan sama memudahkan peretasan akun!' },
+            { id: 's2', text: 'Siti membuat folder TUGAS_INFORMATIKA dan mengelompokkan file sesuai jenisnya.', ans: 'AMAN', fb: 'Bagus! Manajemen file sistematis memudahkan pencarian dokumen.' },
+            { id: 's3', text: 'Rian mengklik tautan tidak dikenal dari nomor tak dikenal yang mengiming-imingi hadiah gratis.', ans: 'BERISIKO', fb: 'Waspada phishing! Tautan tidak dikenal berbahaya bagi keamanan data.' }
+        ];
+
+        const FILE_ITEMS = [
+            { id: 'f1', name: 'Tugas_Informatika.docx', folder: 'TUGAS', icon: 'fa-file-word' },
+            { id: 'f2', name: 'Foto_Kegiatan.jpg', folder: 'FOTO', icon: 'fa-file-image' },
+            { id: 'f3', name: 'Presentasi_Kelompok.pptx', folder: 'PRESENTASI', icon: 'fa-file-powerpoint' },
+            { id: 'f4', name: 'Nilai_Siswa.xlsx', folder: 'DATA', icon: 'fa-file-excel' },
+            { id: 'f5', name: 'Materi_Bab1.pdf', folder: 'MATERI', icon: 'fa-file-pdf' }
+        ];
+
+        const FOLDERS = ['TUGAS', 'FOTO', 'PRESENTASI', 'DATA', 'MATERI'];
+        let selectedFileZ6 = null;
+
+        function initZone6() {
+            switchZone6Tab('security');
+            renderZone6Security();
+            renderZone6Files();
+        }
+
+        function switchZone6Tab(tab) {
+            if(tab === 'security') {
+                document.getElementById('z6-part-security').classList.remove('hidden');
+                document.getElementById('z6-part-files').classList.add('hidden');
+                document.getElementById('z6-tab-security').className = "px-4 py-2 font-bold text-sm border-b-2 border-orange-500 text-orange-600";
+                document.getElementById('z6-tab-files').className = "px-4 py-2 font-bold text-sm border-b-2 border-transparent text-slate-500";
+            } else {
+                document.getElementById('z6-part-security').classList.add('hidden');
+                document.getElementById('z6-part-files').classList.remove('hidden');
+                document.getElementById('z6-tab-security').className = "px-4 py-2 font-bold text-sm border-b-2 border-transparent text-slate-500";
+                document.getElementById('z6-tab-files').className = "px-4 py-2 font-bold text-sm border-b-2 border-orange-500 text-orange-600";
+            }
+        }
+
+        function renderZone6Security() {
+            const container = document.getElementById('z6-security-list');
+            container.innerHTML = SECURITY_ITEMS.map(item => `
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                    <p class="text-xs sm:text-sm font-semibold text-slate-800">${item.text}</p>
+                    <div class="flex gap-2">
+                        <button onclick="answerZ6Sec('${item.id}', 'AMAN')" class="px-3 py-1.5 bg-emerald-100 hover:bg-emerald-200 text-emerald-800 font-bold text-xs rounded-lg">
+                            🟢 AMAN / TEPAT
+                        </button>
+                        <button onclick="answerZ6Sec('${item.id}', 'BERISIKO')" class="px-3 py-1.5 bg-red-100 hover:bg-red-200 text-red-800 font-bold text-xs rounded-lg">
+                            🔴 BERISIKO
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function answerZ6Sec(id, choice) {
+            const item = SECURITY_ITEMS.find(i => i.id === id);
+            if(choice === item.ans) {
+                playSound('correct');
+                alert(`Tepat Sekali! ${item.fb}`);
+            } else {
+                playSound('wrong');
+                alert(`Kurang Tepat. Ingat: ${item.fb}`);
+            }
+        }
+
+        function renderZone6Files() {
+            // Unorganized files pool
+            const pool = document.getElementById('z6-unorganized-files');
+            const unorganized = FILE_ITEMS.filter(f => !gameState.zone6FilesPlaced[f.id]);
+
+            pool.innerHTML = unorganized.map(f => `
+                <button onclick="selectZ6File('${f.id}')" class="px-3 py-2 bg-white border-2 ${selectedFileZ6 === f.id ? 'border-orange-500 bg-orange-50' : 'border-slate-300'} rounded-xl font-bold text-xs flex items-center gap-1.5">
+                    <i class="fa-solid ${f.icon} text-orange-500"></i> ${f.name}
+                </button>
+            `).join('');
+
+            // Folders grid
+            const grid = document.getElementById('z6-folders-grid');
+            grid.innerHTML = FOLDERS.map(fold => {
+                const contained = FILE_ITEMS.filter(f => gameState.zone6FilesPlaced[f.id] === fold);
+                return `
+                    <div onclick="placeZ6File('${fold}')" class="bg-amber-50 border-2 border-dashed border-amber-300 hover:border-amber-500 p-3 rounded-2xl min-h-[100px] flex flex-col justify-between cursor-pointer">
+                        <span class="text-xs font-black text-amber-900 flex items-center gap-1">
+                            <i class="fa-solid fa-folder text-amber-500"></i> 📁 ${fold}
+                        </span>
+                        <div class="space-y-1 my-1">
+                            ${contained.map(c => `
+                                <div class="bg-amber-600 text-white text-[10px] font-bold p-1 rounded flex justify-between">
+                                    <span class="truncate">${c.name}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <span class="text-[9px] text-amber-600 block text-center">Klik untuk memasukkan</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function selectZ6File(id) {
+            selectedFileZ6 = id;
+            renderZone6Files();
+        }
+
+        function placeZ6File(folder) {
+            if(!selectedFileZ6) {
+                alert("Pilih file digital terlebih dahulu!");
+                return;
+            }
+            gameState.zone6FilesPlaced[selectedFileZ6] = folder;
+            selectedFileZ6 = null;
+            renderZone6Files();
+        }
+
+        function completeZone6() {
+            let correctFiles = 0;
+            FILE_ITEMS.forEach(f => {
+                if(gameState.zone6FilesPlaced[f.id] === f.folder) correctFiles++;
+            });
+
+            if(correctFiles === FILE_ITEMS.length) {
+                playSound('correct');
+                markZoneComplete(6, 20, 'b5');
+                alert("Hebat! Seluruh file digital berhasil dirapikan secara sistematis!\n+20 Poin ⭐ | Lencana Smart User diraih! 🏆");
+                showScreen('screen-map');
+            } else {
+                playSound('wrong');
+                alert(`Pengorganisasian file belum lengkap (${correctFiles}/${FILE_ITEMS.length} tepat). Masukkan semua file ke folder yang sesuai!`);
+            }
+        }
+
+        /* ============================================================
+           ZONA 7: EVALUASI MASTER TIKLOPEDIA
+           ============================================================ */
+        const MASTER_QUIZ = [
+            { q: "Perangkat hardware yang berfungsi memasukkan data kata/karakter ke sistem adalah...", opts: ["A. Monitor", "B. Keyboard", "C. Speaker", "D. Printer"], ans: 1 },
+            { q: "Siti ingin menyimpan file tugas agar bisa diakses baik dari laptop sekolah maupun HP rumah. Teknologi terbaik adalah...", opts: ["A. Smart TV", "B. Cloud Storage", "C. Scanner", "D. Router"], ans: 1 },
+            { q: "Aplikasi pengolah kata (Google Docs / MS Word) termasuk dalam kelompok perkakas digital...", opts: ["A. Hiburan", "B. Produktivitas", "C. Komunikasi", "D. Gaming"], ans: 1 },
+            { q: "Manakah tindakan keamanan digital yang PALING TEPAT?", opts: ["A. Memakai kata sandi tanggal lahir untuk semua akun", "B. Membagikan password kepada teman sekelas", "C. Membuat kombinasi kata sandi unik dan merahasiakannya", "D. Mengklik tautan hadiah mencurigakan"], ans: 2 },
+            { q: "Perkakas TIK yang berfungsi memancarkan tampilan layar komputer ke dinding/layar besar adalah...", opts: ["A. Webcam", "B. Proyektor", "C. Harddisk", "D. Microchip"], ans: 1 },
+            { q: "Mengelompokkan file .docx ke folder TUGAS dan .jpg ke folder FOTO bertujuan untuk...", opts: ["A. Membuat memori HP cepat penuh", "B. Pengorganisasian sistematis agar file mudah ditemukan", "C. Menghapus otomatis dokumen", "D. Menyembunyikan virus"], ans: 1 },
+            { q: "Perangkat yang mengubah data sinyal digital menjadi dokumen fisik tercetak di kertas adalah...", opts: ["A. Scanner", "B. Printer", "C. Speaker", "D. Mouse"], ans: 1 },
+            { q: "WhatsApp dan Email merupakan perkakas digital utama dalam kelompok...", opts: ["A. Hiburan", "B. Komunikasi", "C. Olah Angka", "D. Multimedia"], ans: 1 },
+            { q: "Mengapa mesin tik dikategorikan sebagai teknologi TIK masa lalu?", opts: ["A. Karena bekerja mekanik tanpa sistem digital & internet", "B. Karena harganya sangat mahal", "C. Karena berukuran sangat kecil", "D. Karena menggunakan layar sentuh"], ans: 0 },
+            { q: "Perkakas pemroses utama yang dianggap sebagai 'otak' komputer adalah...", opts: ["A. CPU (Prosesor)", "B. Keyboard", "C. Flashdisk", "D. Monitor"], ans: 0 }
+        ];
+
+        function initZone7() {
+            gameState.zone7Index = 0;
+            gameState.zone7Score = 0;
+            renderZone7Question();
+        }
+
+        function renderZone7Question() {
+            const qObj = MASTER_QUIZ[gameState.zone7Index];
+            document.getElementById('z7-q-index').textContent = gameState.zone7Index + 1;
+            document.getElementById('z7-question-text').textContent = qObj.q;
+            document.getElementById('z7-feedback').className = "hidden p-4 rounded-xl text-sm font-medium";
+            document.getElementById('z7-next-btn').classList.add('hidden');
+
+            const container = document.getElementById('z7-options-container');
+            container.innerHTML = qObj.opts.map((opt, idx) => `
+                <button onclick="answerZone7(${idx})" class="w-full text-left p-3.5 rounded-xl border border-slate-200 hover:border-cyan-500 hover:bg-cyan-50 font-bold text-sm text-slate-700 transition">
+                    ${opt}
+                </button>
+            `).join('');
+        }
+
+        function answerZone7(chosen) {
+            const qObj = MASTER_QUIZ[gameState.zone7Index];
+            const fb = document.getElementById('z7-feedback');
+            fb.classList.remove('hidden');
+
+            if(chosen === qObj.ans) {
+                playSound('correct');
+                gameState.zone7Score += 10;
+                gameState.score += 10;
+                fb.className = "p-3.5 rounded-xl text-sm font-bold bg-emerald-100 text-emerald-800 border border-emerald-300";
+                fb.textContent = "✓ Jawaban Benar! (+10 Poin)";
+            } else {
+                playSound('wrong');
+                fb.className = "p-3.5 rounded-xl text-sm font-bold bg-red-100 text-red-800 border border-red-300";
+                fb.textContent = "✕ Belum tepat. Pelajari kembali materi perkakas TIK!";
+            }
+
+            document.getElementById('z7-next-btn').classList.remove('hidden');
+        }
+
+        function nextZone7Question() {
+            gameState.zone7Index++;
+            if(gameState.zone7Index < MASTER_QUIZ.length) {
+                renderZone7Question();
+            } else {
+                markZoneComplete(7, 50, 'b6');
+                showScreen('screen-reflection');
+            }
+        }
+
+        /* ============================================================
+           REFLEKSI & CERTIFICATE GENERATOR
+           ============================================================ */
+        function submitReflection(e) {
+            e.preventDefault();
+            playSound('badge');
+
+            // Set final screen data
+            document.getElementById('res-player-name').textContent = gameState.player.name;
+            document.getElementById('res-player-class').textContent = `Kelas ${gameState.player.class} | Absen No. ${gameState.player.absen}`;
+            document.getElementById('res-total-score').textContent = gameState.score;
+            document.getElementById('res-total-zones').textContent = `${gameState.completedZones.length}/7`;
+            document.getElementById('res-total-badges').textContent = `${gameState.badges.length}/6`;
+
+            // Render badges list
+            const badgeContainer = document.getElementById('res-badges-list');
+            badgeContainer.innerHTML = gameState.badges.map(bKey => {
+                const b = BADGES[bKey];
+                return `
+                    <div class="flex items-center gap-1.5 bg-amber-100 text-amber-900 border border-amber-300 px-3 py-1.5 rounded-full text-xs font-bold badge-glow">
+                        <i class="fa-solid ${b.icon} text-amber-600"></i> ${b.name}
+                    </div>
+                `;
+            }).join('');
+
+            showScreen('screen-result');
+        }
+
+        function restartAdventure() {
+            gameState.score = 0;
+            gameState.completedZones = [];
+            gameState.badges = [];
+            renderMap();
+            showScreen('screen-splash');
+        }
+
+        /* ============================================================
+           INITIALIZATION ON LOAD
+           ============================================================ */
+        window.onload = function() {
+            initAvatarSelector();
+            showScreen('screen-splash');
+        };
+    </script>
+</body>
+</html>
